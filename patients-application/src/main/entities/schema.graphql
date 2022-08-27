@@ -1,0 +1,65 @@
+type Query {
+  patient(id: Int!): Patient!
+  patients(filter: PatientFilter, take: Int, skip: Int, order: Int): [Patient!]!
+}
+
+type Mutation {
+  createPatient(input: CreatePatientInput!): Patient!
+  updatePatient(input: UpdatePatientInput!): Patient!
+  insertPoints(input: InsertPointsPatientInput!): Patient!
+  deletePatient(id: Int!): Patient!
+}
+
+type Patient @key(fields: "id"){
+  id: Int
+  name: String
+  email: String
+  phone: String
+  points: Int
+  origin: origin
+}
+
+"""
+The possible origins.
+"""
+enum origin {
+  INBOUND
+  RECOMMENDATION
+  OUTBOUND
+  OTHER
+}
+
+input PatientFilter {
+  ids: [Int!]
+  names: [String!]
+  emails: [String!]
+  phones: [String!]
+  points: Points
+  Origins: [origin!]
+}
+
+input Points {
+  bigger: Int
+  equal: Int
+  smaller: Int
+}
+
+input CreatePatientInput {
+  name: String!
+  email: String!
+  phone: String!
+  origin: origin!
+}
+
+input UpdatePatientInput {
+  name: String
+  email: String
+  phone: String
+  origin: origin
+  id: Float!
+}
+
+input InsertPointsPatientInput {
+  points: Int!
+  id: Float!
+}

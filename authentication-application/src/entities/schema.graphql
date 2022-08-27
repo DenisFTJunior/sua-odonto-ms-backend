@@ -1,0 +1,23 @@
+type Query {
+  isValidToken(token: String!): ValidationResult!
+}
+
+type Mutation {
+  login(input: loginInput!): Login!
+}
+
+type ValidationResult {
+  message: String
+  status: Boolean!
+}
+
+type Login @key(fields: "token"){
+  token: String!
+  username: String!
+}
+
+
+input loginInput {
+  username: String!
+  password: String!
+}

@@ -1,0 +1,56 @@
+type Query {
+  user(id: Int!): User!
+  users(filter: UserFilter, take: Int, skip: Int, order: Int): [User!]!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+  updateUser(input: UpdateUserInput!): User!
+  changePassword(input: ChangePasswordInput!): User!
+  deleteUser(id: Int!): User!
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  name: String
+  email: String
+  password: String
+  role: Role
+}
+
+input UserFilter {
+  ids: [Int!]!
+  names: [String!]!
+  emails: [String!]!
+  roles: [Role!]!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  role: Role!
+}
+
+input UpdateUserInput {
+  id: Float!
+  name: String
+  email: String
+  password: String
+  role: Role
+}
+
+input ChangePasswordInput {
+  userId: ID!
+  password: String!
+  newPassword: String!
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  DOCTOR
+  SALES
+  MARKETING
+  SECRETARY
+}
