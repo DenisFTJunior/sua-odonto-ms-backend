@@ -1,17 +1,19 @@
-# GraphQL Federation - Code First
-
-A simple example of GraphQL Federation using Code First approach.
+# Micro service graphql endpoint
 
 ## Execution
 
 Make sure to start the two sub-graph applications first, then the gatway. Otherwise the gateway won't be able to fetch schemas from the sub-graphs.
 
 ```sh
+cd patients-application && npm run start
+```
+
+```sh
 cd users-application && npm run start
 ```
 
 ```sh
-cd posts-application && npm run start
+cd auth-application && npm run start
 ```
 
 ```sh
@@ -19,21 +21,10 @@ cd gateway && npm run start
 ```
 
 ## Access the graph
+You can reach the gateway under `http://localhost:3000/`
 
-You can reach the gateway under `http://localhost:3002/graphql`
-
-## Query a combined graph
-
-```gql
-query getUserWithPosts($userId: ID!) {
-  getUser(id: $userId) {
-    id
-    name
-    posts {
-      authorId
-      id
-      title
-    }
-  }
-}
-```
+## Next Steps in project
+- [ ] Resolve field user in auth-app
+- [ ] add Helmet
+- [ ] check email and password regex
+- [ ] santize functions
